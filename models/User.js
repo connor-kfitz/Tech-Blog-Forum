@@ -15,14 +15,18 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Comment: {
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    comment: {
       type: DataTypes.STRING,
       allowNull: true,
     },
   },
   {
     sequelize,
-    freezeTableName: true,
+    freezeTableName: false,
     underscored: true,
     modelName: 'user',
   }
