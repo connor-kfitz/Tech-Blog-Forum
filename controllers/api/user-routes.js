@@ -1,13 +1,9 @@
 const router = require('express').Router();
-const { User } = require('../../models');
-
-console.log('Please work');
+const bcrypt = require('bcrypt');
+const { User, Posts } = require('../../models');
 
 // LOGIN
 router.post('/login', async (req, res) => {
-    
-    console.log(req.body.user_name);
-    console.log(req.body.password);
 
     try {
       const dbUserData = await User.findOne({
@@ -15,8 +11,6 @@ router.post('/login', async (req, res) => {
           user_name: req.body.user_name,
         },
       });
-
-      console.log()
   
       if (!dbUserData) {
         res
@@ -24,9 +18,6 @@ router.post('/login', async (req, res) => {
           .json({ message: 'Incorrect username or password. Please try again!' });
         return;
       }
-      
-      console.log(dbUserData.user_name);
-      console.log(dbUserData.password);
 
       const validPassword = await bcrypt.compare(
         req.body.password,
@@ -39,10 +30,15 @@ router.post('/login', async (req, res) => {
           .json({ message: 'Incorrect username or password. Please try again!' });
         return;
       }
+
+      console.log('Check')
+      console.log(dbUserData);
   
       // Once the user successfully logs in, set up the sessions variable 'loggedIn'
       req.session.save(() => {
         req.session.loggedIn = true;
+        req.session.userData = dbUserData;
+        req.session.userID = dbUserData.id;
 
         res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
       });
@@ -54,12 +50,12 @@ router.post('/login', async (req, res) => {
 
 // CREATE new user
 router.post('/', async (req, res) => {
-    console.log(req.body.user_name);
     try {
       const dbUserData = await User.create({
         user_name: req.body.user_name,
         password: await bcrypt.hash(req.body.password, 10),
       });
+
         req.session.save(() => {
         req.session.loggedIn = true;
         res.status(200).json(dbUserData);
@@ -81,6 +77,39 @@ router.post('/logout', (req, res) => {
       res.status(404).end();
     }
   });
+
+// Render New Post
+router.post('/renderNewPost', async (req, res) => {
+  try {
+      req.session.save(() => {
+        req.session.showNewPost = true;
+        res.status(200).json();
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// CREATE A New Post
+router.post('/create', async (req, res) => {
+  console.log(req.session.userID)
+  try {
+    const dbUserData = await Posts.create({
+      title: req.body.title,
+      comment: req.body.comment,
+      userID: req.session.userID,
+    });
+
+      req.session.save(() => {
+        res.status(200).json(dbUserData);
+
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
 

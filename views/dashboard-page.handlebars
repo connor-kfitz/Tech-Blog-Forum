@@ -1,5 +1,39 @@
-{{#if loggedIn}}
+{{!-- {{#if loggedIn}} --}}
 <h1>TEST DASHBOARD</h1>
-{{else}}
-<a href="/login">You must login first</a>
-{{/if}}
+<h1>{{userData.user_name}}</h1>
+
+    
+    {{#if showNewPost}}
+        <form class="form new-post-form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-input" type="text" id="title" name="title" />
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input class="form-input" type="text" id="comment" name="comment" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="newPostSubmit">Create</button>
+        </div>
+        </form>
+
+        <script src="./js/createPost.js"></script>
+
+    {{else}}
+        <button id="newPostBtn">Create New Blog Post</button>
+        <script src="./js/showNewPost.js"></script>
+
+        {{#each posts}}
+        <h1>Title: {{title}}</h1>
+        <h2>Comment: {{comment}}</h2>
+        {{/each}}
+
+    {{/if}}
+
+
+{{!-- {{else}}
+    <a href="/login">You must login first</a>
+{{/if}} --}}
+
+
