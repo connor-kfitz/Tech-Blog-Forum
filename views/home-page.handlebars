@@ -1,36 +1,12 @@
-{{!-- {{#if status}}
-    <div id='data'data-userID="{{postData.userID}}" data-postID="{{postData.id}}">
-        <h1>Title: {{postData.title}} <br>
-            Content: {{postData.comment}} <br>
-            By: {{userData.user_name}} <br>
-            Date Created: {{postData.createdAt}} <br>
-        </h1> --}}
-
-        {{!-- {{#each commentData}}
-        <h1> 
-
-        </h1>
-        {{/each}} --}}
-
-
-        {{!-- <form class="form new-comment-form">
-            <div class="form-group">
-                <label for="title">Comment</label>
-                <input class="form-input" type="text" id="comment" name="comment" />
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" id="newCommentSubmit">Create</button>
-            </div>
-            </form>
-    </div>
-    <script src="./js/submitComment.js"></script> --}}
-
-    <div id="postContainer">
-        {{#each posts}}
+<div id="postContainer">
+    {{#each posts}}
         <h1 class="post" id="{{id}}">
             Title {{title}} <br>
             Date Created: {{createdAt}}
         </h1>
-        {{/each}}
-    </div>
-    <script src="./js/viewPost.js"></script>
+    {{/each}}
+</div>
+
+{{#if loggedIn}}
+<script src="./js/viewPost.js"></script>
+{{/if}}

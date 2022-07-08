@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
             userData: req.session.userData,
             postData: req.session.postData,
             newComment: req.session.newcomment,
-            // loggedIn: req.session.loggedIn,
+            loggedIn: req.session.loggedIn,
         });
 
     } catch (err) {
@@ -50,7 +50,7 @@ router.get('/dashboard', async (req, res) => {
         res.render('dashboard-page', {
             users,
             posts,
-            // loggedIn: req.session.loggedIn,
+            loggedIn: req.session.loggedIn,
             userData: req.session.userData,
             showNewPost: req.session.showNewPost,
         });
@@ -61,7 +61,7 @@ router.get('/dashboard', async (req, res) => {
 
         res.render('dashboard-page', {
             users,
-            // loggedIn: req.session.loggedIn,
+            loggedIn: req.session.loggedIn,
             userData: req.session.userData,
             showNewPost: req.session.showNewPost,
         });
@@ -114,6 +114,7 @@ router.get('/post/:id', async (req, res) => {
         res.render('single-post', {
             post,
             comments,
+            loggedIn: req.session.loggedIn,
         });
 
       } catch (err) {
@@ -162,6 +163,7 @@ router.get('/dashboard/post/:id', async (req, res) => {
 
         res.render('single-dash-post', {
             post,
+            loggedIn: req.session.loggedIn,
             // comments,
         });
 
