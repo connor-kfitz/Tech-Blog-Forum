@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User, Posts } = require('../../models');
+const { User, Posts, Comments } = require('../../models');
 
 // LOGIN
 router.post('/login', async (req, res) => {
@@ -31,8 +31,6 @@ router.post('/login', async (req, res) => {
         return;
       }
 
-      console.log('Check')
-      console.log(dbUserData);
   
       // Once the user successfully logs in, set up the sessions variable 'loggedIn'
       req.session.save(() => {
@@ -112,42 +110,66 @@ router.post('/create', async (req, res) => {
   }
 });
 
-// LOAD single post from homepage
-router.post('/loadSinglePost', async (req, res) => {
+// // LOAD single post from homepage
+// router.post('/loadSinglePost', async (req, res) => {
 
-  console.log(req.body.userID);
+//   try {
+//     const dbPostData = await Posts.findOne({
+//       where: {
+//         id: req.body.ID,
+//       }
+//     });
+
+//     var userID = dbPostData.userID;
+
+//     const dbUserData = await User.findOne({
+//       where: {
+//         id: userID
+//       }
+//     });
+
+//     const dbCommentData = await Comments.findAll({
+//       where: {
+//         postID: req.body.ID
+//       },
+//     });
+
+//     const comments = dbCommentData.map((comment) =>
+//     comment.get({ plain: true })
+//     );
+//       req.session.save(() => {
+//         req.session.postData = dbPostData;
+//         req.session.userData = dbUserData;
+//         req.session.status = true;
+//         res.status(200).json(dbPostData);
+
+//         console.log('first becnh')
+//         console.log(req.session.status);
+//     });
+
+
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
+// CREATE A New Comment
+router.post('/newComment', async (req, res) => {
   try {
-    const dbPostData = await Posts.findOne({
-      where: {
-        id: req.body.ID,
-      }
+    const dbCommentData = await Comments.create({
+      postComment: req.body.comment,
+      userID: req.body.userID,
+      postID: req.body.postID,
     });
 
-    var userID = dbPostData.userID;
+    console.log(dbCommentData);
 
-    // console.log(userID)
-
-    const dbUserData = await User.findOne({
-      where: {
-        id: userID
-      }
-    });
-
-    console.log(dbUserData);
-
-      // console.log(dbPostData);
-    
       req.session.save(() => {
-        req.session.postData = dbPostData;
-        req.session.userData = dbUserData;
-        req.session.status = true;
-        res.status(200).json(dbPostData);
+        req.session.newComment = dbCommentData;
+        res.status(200).json(dbCommentData);
 
-        console.log('first becnh')
-        console.log(req.session.status);
     });
-
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

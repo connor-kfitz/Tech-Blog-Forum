@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User, Posts } = require('../models');
+const { User, Posts, Comments } = require('../models');
 
 router.get('/', async (req, res) => {
     try{
@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
             post.get({ plain: true})    
         );
 
-        console.log(req.session.userData);
 
 
         res.render('home-page', {
@@ -18,6 +17,7 @@ router.get('/', async (req, res) => {
             status: req.session.status,
             userData: req.session.userData,
             postData: req.session.postData,
+            newComment: req.session.newcomment,
             // loggedIn: req.session.loggedIn,
         });
 
@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
 router.get('/dashboard', async (req, res) => {
     try{
 
-        console.log(req.session.showNewPost);
         const userData = await User.findAll();
 
         const users = userData.map((user) => 
@@ -73,9 +72,61 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
+// Route to get one Post And Comments
+router.get('/post/:id', async (req, res) => {
+    try{ 
+        const postData = await Posts.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['user_name']
+                }
+            ],
+        });
+
+        const commentData = await Comments.findAll({
+            where: {
+                postID: req.params.id,
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['user_name']
+                }
+            ],
+        });
+        
+        if(!postData) {
+            res.status(404).json({message: 'No post with this id!'});
+            return;
+        }
+
+        const post = postData.get({ plain: true });
+
+        const comments = commentData.map((comment) =>
+            comment.get({ plain: true })
+        );
+
+        console.log('Right Here');
+        console.log(comments);
+        console.log(post);
+
+        res.render('single-post', {
+            post,
+            comments,
+        });
+
+      } catch (err) {
+          res.status(500).json(err);
+      };     
+  });
+
+
 router.get('/login', async (req, res) => {
     res.render('login-page');
 });
+
+// Route to get comments for one Post
 
 // Logout
 router.post('/api/users/logout', (req, res) => {
