@@ -102,6 +102,7 @@ router.post('/create', async (req, res) => {
     });
 
       req.session.save(() => {
+        req.session.showNewPost = false;
         res.status(200).json(dbUserData);
 
     });

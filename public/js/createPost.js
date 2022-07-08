@@ -13,7 +13,7 @@ const createNewPost = async (event) => {
     });
 
     if (response.ok) {
-    document.location.replace('/');
+    document.location.replace('/dashboard');
     } else {
     alert('Error creating new post');
     }
