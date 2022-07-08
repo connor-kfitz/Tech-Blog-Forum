@@ -10,14 +10,14 @@ router.get('/', async (req, res) => {
             post.get({ plain: true})    
         );
 
+        console.log(req.session.userData);
 
-        console.log('second bench');
-        console.log(req.session.status);
 
         res.render('home-page', {
             posts,
-            postData: req.session.postData,
             status: req.session.status,
+            userData: req.session.userData,
+            postData: req.session.postData,
             // loggedIn: req.session.loggedIn,
         });
 

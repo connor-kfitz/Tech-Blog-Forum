@@ -123,10 +123,23 @@ router.post('/loadSinglePost', async (req, res) => {
       }
     });
 
+    var userID = dbPostData.userID;
+
+    // console.log(userID)
+
+    const dbUserData = await User.findOne({
+      where: {
+        id: userID
+      }
+    });
+
+    console.log(dbUserData);
+
       // console.log(dbPostData);
     
       req.session.save(() => {
         req.session.postData = dbPostData;
+        req.session.userData = dbUserData;
         req.session.status = true;
         res.status(200).json(dbPostData);
 
