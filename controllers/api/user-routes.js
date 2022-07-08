@@ -93,7 +93,7 @@ router.post('/renderNewPost', async (req, res) => {
 
 // CREATE A New Post
 router.post('/create', async (req, res) => {
-  console.log(req.session.userID)
+  // console.log(req.session.userID)
   try {
     const dbUserData = await Posts.create({
       title: req.body.title,
@@ -111,5 +111,33 @@ router.post('/create', async (req, res) => {
   }
 });
 
-module.exports = router;
+// LOAD single post from homepage
+router.post('/loadSinglePost', async (req, res) => {
 
+  console.log(req.body.userID);
+  try {
+    const dbPostData = await Posts.findOne({
+      where: {
+        id: req.body.ID,
+      }
+    });
+
+      // console.log(dbPostData);
+    
+      req.session.save(() => {
+        req.session.postData = dbPostData;
+        req.session.status = true;
+        res.status(200).json(dbPostData);
+
+        console.log('first becnh')
+        console.log(req.session.status);
+    });
+
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+module.exports = router;

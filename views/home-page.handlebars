@@ -1,6 +1,15 @@
-<div id="blogPostCard">
-    {{#each users as |user|}}
-    <h1> {{user.user_name}} </h1>
-    <h1> {{user.comment}} </h1>
-    {{/each}}
-</div>
+{{#if status}}
+    <h1>PLEALSDALSDL</h1>
+
+
+{{else}}
+    <div id="postContainer">
+        {{#each posts}}
+        <h1 class="post" id="{{id}}">
+            Title {{title}} <br>
+            Date Created: {{createdAt}}
+        </h1>
+        {{/each}}
+    </div>
+    <script src="./js/viewPost.js"></script>
+{{/if}}

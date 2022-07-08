@@ -4,14 +4,20 @@ const { User, Posts } = require('../models');
 
 router.get('/', async (req, res) => {
     try{
-        const userData = await User.findAll();
+        const postData = await Posts.findAll();
 
-        const users = userData.map((user) => 
-            user.get({ plain: true})    
+        const posts = postData.map((post) => 
+            post.get({ plain: true})    
         );
 
+
+        console.log('second bench');
+        console.log(req.session.status);
+
         res.render('home-page', {
-            users,
+            posts,
+            postData: req.session.postData,
+            status: req.session.status,
             // loggedIn: req.session.loggedIn,
         });
 
