@@ -189,4 +189,23 @@ router.delete('/delete/:id', (req, res) => {
   .catch((err) => res.json(err));
 });
 
+// UPDATE Post
+router.put('/update/:id', (req, res) => {
+  Posts.update(
+    {
+      comment: req.body.updatedPost,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((updatedPost) => {
+      res.json(updatedPost);
+    })
+    .catch((err) => {
+      res.json(err);
+    })
+});
 module.exports = router;

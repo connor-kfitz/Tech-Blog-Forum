@@ -3,6 +3,10 @@
      Post Content: {{post.comment}} </h1>
 
 <button id="deleteButton" data-postID ='{{post.id}}' data-userID="{{post.userID}}">DELETE POST</button>
+
+               <textarea id="postUpdate" cols="30" rows="10"></textarea>
+               <button id="updateButton" data-postID ='{{post.id}}' data-userID="{{post.userID}}">Update POST</button>
 </div>
 
 <script src="/js/deletePost.js"></script>
+<script src="/js/updatePost.js"></script>
