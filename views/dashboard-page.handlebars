@@ -22,12 +22,17 @@
 
     {{else}}
         <button id="newPostBtn">Create New Blog Post</button>
-        <script src="./js/showNewPost.js"></script>
 
+        <div id="postContainer">
         {{#each posts}}
-        <h1>Title: {{title}}</h1>
-        <h2>Comment: {{comment}}</h2>
+        <h1 class="post" id="{{id}}">
+            Title: {{title}}
+            Comment: {{comment}}</h1>
         {{/each}}
+        </div>  
+
+        <script src="/js/showNewPost.js"></script>
+        <script src="/js/viewDashPost.js"></script>
 
     {{/if}}
 

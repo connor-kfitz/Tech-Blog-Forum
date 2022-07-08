@@ -121,12 +121,61 @@ router.get('/post/:id', async (req, res) => {
       };     
   });
 
+// Route to get one Post from Dashboard
+router.get('/dashboard/post/:id', async (req, res) => {
+    try{ 
+        const postData = await Posts.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['user_name']
+                }
+            ],
+        });
+
+        // const commentData = await Comments.findAll({
+        //     where: {
+        //         postID: req.params.id,
+        //     },
+        //     include: [
+        //         {
+        //             model: User,
+        //             attributes: ['user_name']
+        //         }
+        //     ],
+        // });
+        
+        if(!postData) {
+            res.status(404).json({message: 'No post with this id!'});
+            return;
+        }
+
+        const post = postData.get({ plain: true });
+
+        // const comments = commentData.map((comment) =>
+        //     comment.get({ plain: true })
+        // );
+
+        // console.log('Right Here');
+        // console.log(comments);
+        console.log(post);
+
+        res.render('single-dash-post', {
+            post,
+            // comments,
+        });
+
+      } catch (err) {
+          res.status(500).json(err);
+      };     
+  });
+
 
 router.get('/login', async (req, res) => {
     res.render('login-page');
 });
 
-// Route to get comments for one Post
+
 
 // Logout
 router.post('/api/users/logout', (req, res) => {

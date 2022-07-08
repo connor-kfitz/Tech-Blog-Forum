@@ -176,4 +176,17 @@ router.post('/newComment', async (req, res) => {
   }
 });
 
+// DELETE Post
+router.delete('/delete/:id', (req, res) => {
+  Posts.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+  .then((deletedPost) => {
+    res.json(deletedPost);
+  })
+  .catch((err) => res.json(err));
+});
+
 module.exports = router;
