@@ -20,7 +20,7 @@ const newComment = async (event) => {
         });
 
         if (response.ok) {
-        document.location.replace('/post/' + userID);
+        document.location.replace('/post/' + postID);
         } else {
         alert('Error');
         }

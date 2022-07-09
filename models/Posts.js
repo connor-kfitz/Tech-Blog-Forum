@@ -22,7 +22,7 @@ Posts.init(
     userID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    }
+    },
   },
   {
     sequelize,

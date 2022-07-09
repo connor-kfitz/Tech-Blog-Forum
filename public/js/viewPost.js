@@ -9,6 +9,8 @@ parent.addEventListener('click', event => {
 
 const displaySelectedPost = async (ID) => {
 
+  console.log(ID)
+
   const response = await fetch('/post/' + ID, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
