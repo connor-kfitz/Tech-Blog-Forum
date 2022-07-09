@@ -1,8 +1,6 @@
 {{#if loggedIn}}
-<h1>TEST DASHBOARD</h1>
 <h1>{{userData.user_name}}</h1>
 
-    
     {{#if showNewPost}}
         <form class="form new-post-form">
         <div class="form-group">
@@ -38,7 +36,7 @@
 
 
 {{else}}
-    <a href="/login">You must login first</a>
+     <h1 id="loginPrompt">You must <a href="/login">Login</a> first</h1></a>
 {{/if}}
 
 

@@ -91,7 +91,7 @@ router.post('/renderNewPost', async (req, res) => {
 
 // CREATE A New Post
 router.post('/create', async (req, res) => {
-  // console.log(req.session.userID)
+  console.log(req.session.userID)
   try {
     const dbUserData = await Posts.create({
       title: req.body.title,

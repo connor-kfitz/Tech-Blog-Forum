@@ -1,24 +1,24 @@
-var parent = document.getElementById('postContainer');
+// var parent = document.getElementById('postContainer');
 
-parent.addEventListener('click', event => {
-    if (event.target.className == 'post') {
-        displaySelectedPost(event.target.id);
-        console.log(event.target.id);
-    }
-})
+// parent.addEventListener('click', event => {
+//     if (event.target.className == 'post') {
+//         displaySelectedPost(event.target.id);
+//         console.log(event.target.id);
+//     }
+// })
 
-const displaySelectedPost = async (ID) => {
+// const displaySelectedPost = async (ID) => {
 
-  console.log(ID)
+//   console.log(ID)
 
-  const response = await fetch('/post/' + ID, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
+//   const response = await fetch('/post/' + ID, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json' },
+//       });
 
-    if (response.ok) {
-    document.location.replace('/post/'+ID);
-    } else {
-    alert('TEST Error');
-    }
-}
+//     if (response.ok) {
+//     document.location.replace('/post/'+ID);
+//     } else {
+//     alert('TEST Error');
+//     }
+// }

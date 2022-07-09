@@ -36,7 +36,8 @@ router.get('/', async (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     try{
-
+        console.log("ASDASDASDASDASDA")
+        console.log(req.session.loggedIn);
         const userData = await User.findAll();
 
         const users = userData.map((user) => 
@@ -113,10 +114,6 @@ router.get('/post/:id', async (req, res) => {
         const comments = commentData.map((comment) =>
             comment.get({ plain: true })
         );
-
-        console.log('Right Here');
-        console.log(comments);
-        console.log(post);
 
         res.render('single-post', {
             post,

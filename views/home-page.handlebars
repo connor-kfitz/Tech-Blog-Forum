@@ -1,14 +1,12 @@
 <div id="postContainer" class="flex">
     {{#each posts}}
-    <div class="post" id="{{id}}">
-        <div class="homePostHeader flex">
-            <h1>{{title}}</h1>
-            <h1>{{formatDate createdAt}}</h1>
-            <h1>{{user.user_name}}</h1>
-        </div> 
-        <div></div>
-        <div></div>
-    </div>
+        <a class="post flex" href="/post/{{id}}">
+            <div class="homePostHeader flex">
+                <h1 class="homePostHeadChild">{{title}}</h1>
+                <h4 class="homePostHeadChild">Created by {{user.user_name}} on {{formatDate createdAt}}</h4>
+            </div> 
+            <div class="homePostBody"><h2>{{comment}}</h2></div>
+        </a>
     {{/each}}
 </div>
 
