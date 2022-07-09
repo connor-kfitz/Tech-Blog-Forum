@@ -48,7 +48,13 @@ router.get('/dashboard', async (req, res) => {
             const postData = await Posts.findAll({
                 where: {
                     userID: req.session.userID,
-                }
+                },
+                include: [
+                    {
+                        model: User,
+                        attributes: ['user_name']
+                    }
+                ],
             })
 
             const posts = postData.map((post) =>

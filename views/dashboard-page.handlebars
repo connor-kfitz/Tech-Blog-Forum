@@ -1,21 +1,23 @@
 {{#if loggedIn}}
-<h1>{{userData.user_name}}</h1>
+    
+    {{!-- <h1 id="currentUser">Current User: {{userData.user_name}}</h1> --}}
 
     {{#if showNewPost}}
-        <form class="form new-post-form">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input class="form-input" type="text" id="title" name="title" />
+        <div id="newPostContainer" class="flex">
+            <form id='newPostForm' class="form new-post-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-input" type="text" id="title" name="title" />
+            </div>
+            <div class="form-group">
+                <label for="comment">Body</label>
+                <textarea class="form-input-long" type="text" id="comment" name="comment" /></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="newPostSubmit">Create</button>
+            </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="comment">Comment</label>
-            <input class="form-input" type="text" id="comment" name="comment" />
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="newPostSubmit">Create</button>
-        </div>
-        </form>
-
         <script src="./js/createPost.js"></script>
 
     {{else}}
@@ -23,9 +25,13 @@
 
         <div id="postContainer">
         {{#each posts}}
-        <h1 class="post" id="{{id}}">
-            Title: {{title}}
-            Comment: {{comment}}</h1>
+            <a class='post flex'href="/dashboard/post/{{id}}">
+                <div class="homePostHeader flex">
+                    <h1 class="homePostHeadChild">{{title}}</h1>
+                    <h4 class="homePostHeadChild">Created by {{user.user_name}} on {{formatDate createdAt}}</h4>
+                </div> 
+                <div class="homePostBody"><h2>{{comment}}</h2></div>
+            </a>
         {{/each}}
         </div>  
 
