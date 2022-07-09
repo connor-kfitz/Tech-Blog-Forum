@@ -129,6 +129,43 @@ body {
     width: 100%;
 }
 
+/* Dashboard Delete / Update Post */
+
+#singleDashBigContainer {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#singleDashboardContainer {
+    justify-content: center;
+    width: 65%;
+}
+
+#deleteUpdateContainer {
+    width: 30.5%;    
+    flex-flow: column;
+}
+
+#deleteButton {
+    height: 35px;
+    font-size: 100%;
+}
+
+#postUpdate {
+    overflow: auto;
+    resize: none;
+    width: 100%;
+    margin: 1% 0 1% 0
+}
+
+#updateButton {
+    height: 35px;
+    font-size: 100%;
+    width: 100%;
+}
+
+
 
 /* Login / Signup Page */
 #loginSignupContainer {

@@ -1,11 +1,22 @@
-<div>
-<h1> Title: {{post.title}} <br>
-     Post Content: {{post.comment}} </h1>
+<div id="singleDashBigContainer" class="flex">
+     <div id="singleDashboardContainer" class="flex">
+          <div class="post flex" href="/post/{{id}}">
+               <div class="homePostHeader flex">
+                    <h1 class="homePostHeadChild">{{post.title}}</h1>
+                    <h4 class="homePostHeadChild">Created by {{post.user.user_name}} on {{formatDate post.createdAt}}</h4>
+               </div> 
+               <div class="homePostBody"><h2>{{post.comment}}</h2></div>
+          </div>
+     </div>
 
-<button id="deleteButton" data-postID ='{{post.id}}' data-userID="{{post.userID}}">DELETE POST</button>
-
+     <div id="deleteUpdateContainer" class="flex">
+          <button id="deleteButton" data-postID ='{{post.id}}' data-userID="{{post.userID}}">DELETE POST</button>
+          <div id="updateContainer">
                <textarea id="postUpdate" cols="30" rows="10"></textarea>
                <button id="updateButton" data-postID ='{{post.id}}' data-userID="{{post.userID}}">Update POST</button>
+          </div>
+     </div>
+
 </div>
 
 <script src="/js/deletePost.js"></script>

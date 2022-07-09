@@ -140,7 +140,7 @@ router.get('/dashboard/post/:id', async (req, res) => {
                 {
                     model: User,
                     attributes: ['user_name']
-                }
+                },
             ],
         });
 
