@@ -1,26 +1,24 @@
-<div id='data' data-postID="{{post.id}}" data-userID="{{post.userID}}">
-    <h1> Title: {{post.title}} <br>
-        Post Content: {{post.comment}} <br>
-        User: {{post.user.user_name}}</h1>
+<div id='data' data-postID="{{post.id}}" data-userID="{{post.userID}}" class="flex">
+    <div class="post flex" href="/post/{{id}}">
+        <div class="homePostHeader flex">
+            <h1 class="homePostHeadChild">{{post.title}}</h1>
+            <h4 class="homePostHeadChild">Created by {{post.user.user_name}} on {{formatDate post.createdAt}}</h4>
+        </div> 
+        <div class="homePostBody"><h2>{{post.comment}}</h2></div>
 
-    {{#each comments}}
-        <h1>
-            <h2>TEST Comment</h2>
-            Comment: {{postComment}} <br>
-            User: {{user.username}} <br>
-            DateCreated: {{createdAt}}
-        </h1>
-    {{/each}}
+        {{#each comments}}
+            <div id="singleCommentContainer">
+                <div class="commentPostHeader flex">
+                    <h4 class="homePostCommentHead">Commented by {{user.user_name}} on {{formatDate createdAt}}</h4>
+                </div>
+                <div class="homePostBody"><h2 id="singlePostComment">{{postComment}}</h2></div>
+            </div>
+        {{/each}}
 
-    <form class="form new-comment-form">
-        <div class="form-group">
-            <label for="title">Comment</label>
-            <input class="form-input" type="text" id="comment" name="comment" />
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="newCommentSubmit">Create</button>
-        </div>
-    </form>
+
+        <textarea class="form-input" type="text" id="comment" name="comment" /></textarea>
+        <button type="submit" class="btn btn-primary" id="newCommentSubmit">Comment</button>
+    </div>
 </div>
 
 <script src="/js/submitComment.js"></script>

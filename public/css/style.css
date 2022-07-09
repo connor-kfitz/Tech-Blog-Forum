@@ -50,7 +50,7 @@ body {
 	cursor: pointer;
     height: 60%;
     width: 100px ;
-    border-radius: 7%;
+    border-radius: 1%;
     text-decoration: none;
     color: #e9deac;
 }
@@ -84,6 +84,42 @@ body {
 .homePostBody {
     padding: 0 1% 0 1%;
     background-color: #3f3d2f;
+    margin: 0;
+}
+
+/* Home-page Single Post */
+#singleCommentContainer {
+    border-top: solid black 4px;
+}
+
+.commentPostHeader {
+    background-color: #15140f;
+    justify-content: flex-end;
+}
+
+.homePostCommentHead {
+    color: #e9deac;
+    margin-right: 1%;
+}
+
+#singlePostComment {
+    margin: 0px;
+}
+
+#data {
+    justify-content: center;
+}
+
+#comment {
+    overflow: auto;
+    resize: none;
+    height: 100px;
+    background-color: #e9deac;
+    border-top: solid black 4px;
+}
+
+#newCommentSubmit {
+    height: 40px;
 }
 
 
@@ -101,7 +137,7 @@ body {
     margin: 1% 1% 1% 1%;
     height: 35px;
     width: 10%;
-    border-radius: 2%;
+    border-radius: 1%;
 }
 
 /* Dashboard New Post */
