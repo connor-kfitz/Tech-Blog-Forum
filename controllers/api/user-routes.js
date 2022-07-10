@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
         req.session.loggedIn = true;
         req.session.userData = dbUserData;
         req.session.userID = dbUserData.id;
-        console.log(req.session.loggedIn);
+         console.log(req.session.loggedIn);
 
         res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
       });
@@ -160,7 +160,7 @@ router.post('/newComment', async (req, res) => {
   try {
     const dbCommentData = await Comments.create({
       postComment: req.body.comment,
-      userID: req.body.userID,
+      userID: req.session.userID,
       postID: req.body.postID,
     });
 
