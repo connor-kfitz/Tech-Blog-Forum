@@ -1,4 +1,4 @@
-# MVC: Tech Blog Forum
+# Tech Blog Forum
 
 ## Link
 
